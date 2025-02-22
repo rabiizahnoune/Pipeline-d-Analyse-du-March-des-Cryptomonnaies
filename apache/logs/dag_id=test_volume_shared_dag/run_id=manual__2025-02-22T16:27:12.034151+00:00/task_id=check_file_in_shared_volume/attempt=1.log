@@ -1,0 +1,14 @@
+[2025-02-22T16:27:20.047+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: test_volume_shared_dag.check_file_in_shared_volume manual__2025-02-22T16:27:12.034151+00:00 [queued]>
+[2025-02-22T16:27:20.059+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: test_volume_shared_dag.check_file_in_shared_volume manual__2025-02-22T16:27:12.034151+00:00 [queued]>
+[2025-02-22T16:27:20.059+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-02-22T16:27:20.141+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): check_file_in_shared_volume> on 2025-02-22 16:27:12.034151+00:00
+[2025-02-22T16:27:20.147+0000] {standard_task_runner.py:57} INFO - Started process 159 to run task
+[2025-02-22T16:27:20.151+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'test_volume_shared_dag', 'check_file_in_shared_volume', 'manual__2025-02-22T16:27:12.034151+00:00', '--job-id', '133', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpnhwgm33_']
+[2025-02-22T16:27:20.153+0000] {standard_task_runner.py:85} INFO - Job 133: Subtask check_file_in_shared_volume
+[2025-02-22T16:27:20.237+0000] {task_command.py:415} INFO - Running <TaskInstance: test_volume_shared_dag.check_file_in_shared_volume manual__2025-02-22T16:27:12.034151+00:00 [running]> on host 5fdfec269bbd
+[2025-02-22T16:27:20.370+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='test_volume_shared_dag' AIRFLOW_CTX_TASK_ID='check_file_in_shared_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-02-22T16:27:12.034151+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-22T16:27:12.034151+00:00'
+[2025-02-22T16:27:20.372+0000] {logging_mixin.py:151} INFO - ✅ Le fichier existe dans le volume partagé à : /mnt/hadoop_data/test_file.txt
+[2025-02-22T16:27:20.373+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-22T16:27:20.386+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=test_volume_shared_dag, task_id=check_file_in_shared_volume, execution_date=20250222T162712, start_date=20250222T162720, end_date=20250222T162720
+[2025-02-22T16:27:20.445+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-22T16:27:20.463+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

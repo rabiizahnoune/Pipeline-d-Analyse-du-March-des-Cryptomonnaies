@@ -1,0 +1,23 @@
+[2025-02-21T22:21:29.369+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: gold_data_dag.runer manual__2025-02-21T22:21:24.816643+00:00 [queued]>
+[2025-02-21T22:21:29.382+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: gold_data_dag.runer manual__2025-02-21T22:21:24.816643+00:00 [queued]>
+[2025-02-21T22:21:29.383+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-02-21T22:21:29.403+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): runer> on 2025-02-21 22:21:24.816643+00:00
+[2025-02-21T22:21:29.410+0000] {standard_task_runner.py:57} INFO - Started process 158 to run task
+[2025-02-21T22:21:29.413+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'gold_data_dag', 'runer', 'manual__2025-02-21T22:21:24.816643+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp_9wmmer7']
+[2025-02-21T22:21:29.416+0000] {standard_task_runner.py:85} INFO - Job 15: Subtask runer
+[2025-02-21T22:21:29.480+0000] {task_command.py:415} INFO - Running <TaskInstance: gold_data_dag.runer manual__2025-02-21T22:21:24.816643+00:00 [running]> on host 7c80cef5d079
+[2025-02-21T22:21:29.716+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='gold_data_dag' AIRFLOW_CTX_TASK_ID='runer' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T22:21:24.816643+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T22:21:24.816643+00:00'
+[2025-02-21T22:21:29.718+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-21T22:21:29.719+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker run -it big_data_projet-scraper bash']
+[2025-02-21T22:21:29.732+0000] {subprocess.py:86} INFO - Output:
+[2025-02-21T22:21:29.779+0000] {subprocess.py:93} INFO - the input device is not a TTY
+[2025-02-21T22:21:29.781+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-21T22:21:29.798+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-21T22:21:29.805+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=gold_data_dag, task_id=runer, execution_date=20250221T222124, start_date=20250221T222129, end_date=20250221T222129
+[2025-02-21T22:21:29.821+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 15 for task runer (Bash command failed. The command returned a non-zero exit code 1.; 158)
+[2025-02-21T22:21:29.867+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-21T22:21:29.901+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

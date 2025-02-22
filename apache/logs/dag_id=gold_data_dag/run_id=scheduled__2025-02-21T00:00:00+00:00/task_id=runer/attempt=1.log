@@ -1,0 +1,47 @@
+[2025-02-22T11:28:01.135+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [queued]>
+[2025-02-22T11:28:01.204+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [queued]>
+[2025-02-22T11:28:01.215+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-02-22T11:28:01.713+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): runer> on 2025-02-21 00:00:00+00:00
+[2025-02-22T11:28:01.772+0000] {standard_task_runner.py:57} INFO - Started process 166 to run task
+[2025-02-22T11:28:01.786+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'gold_data_dag', 'runer', 'scheduled__2025-02-21T00:00:00+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpdiwm_a4_']
+[2025-02-22T11:28:01.829+0000] {standard_task_runner.py:85} INFO - Job 27: Subtask runer
+[2025-02-22T11:28:02.109+0000] {task_command.py:415} INFO - Running <TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [running]> on host 7c80cef5d079
+[2025-02-22T11:28:02.544+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='gold_data_dag' AIRFLOW_CTX_TASK_ID='runer' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-21T00:00:00+00:00'
+[2025-02-22T11:28:02.565+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-22T11:28:02.581+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker run big_data_projet-scraper bash -c "python /app/scraper.py"']
+[2025-02-22T11:28:02.632+0000] {subprocess.py:86} INFO - Output:
+[2025-02-22T11:28:05.725+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-02-22T11:28:05.727+0000] {subprocess.py:93} INFO -   File "/app/scraper.py", line 1, in <module>
+[2025-02-22T11:28:05.730+0000] {subprocess.py:93} INFO -     import yfinance as yf
+[2025-02-22T11:28:05.732+0000] {subprocess.py:93} INFO - ModuleNotFoundError: No module named 'yfinance'
+[2025-02-22T11:28:06.452+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-22T11:28:06.519+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-22T11:28:06.547+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=gold_data_dag, task_id=runer, execution_date=20250221T000000, start_date=20250222T112801, end_date=20250222T112806
+[2025-02-22T11:28:06.647+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 27 for task runer (Bash command failed. The command returned a non-zero exit code 1.; 166)
+[2025-02-22T11:28:06.692+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-22T11:28:06.822+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-22T12:58:46.044+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [queued]>
+[2025-02-22T12:58:46.062+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [queued]>
+[2025-02-22T12:58:46.065+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-02-22T12:58:46.084+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): runer> on 2025-02-21 00:00:00+00:00
+[2025-02-22T12:58:46.090+0000] {standard_task_runner.py:57} INFO - Started process 43 to run task
+[2025-02-22T12:58:46.096+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'gold_data_dag', 'runer', 'scheduled__2025-02-21T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp_x9v7b0p']
+[2025-02-22T12:58:46.099+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask runer
+[2025-02-22T12:58:46.226+0000] {task_command.py:415} INFO - Running <TaskInstance: gold_data_dag.runer scheduled__2025-02-21T00:00:00+00:00 [running]> on host bc125bdcda04
+[2025-02-22T12:58:46.467+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='gold_data_dag' AIRFLOW_CTX_TASK_ID='runer' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-21T00:00:00+00:00'
+[2025-02-22T12:58:46.468+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-22T12:58:46.474+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker run big_data_projet-scraper bash -c "python /app/scraper.py"']
+[2025-02-22T12:58:46.503+0000] {subprocess.py:86} INFO - Output:
+[2025-02-22T12:58:52.569+0000] {subprocess.py:93} INFO - [*********************100%***********************]  1 of 1 completed
+[2025-02-22T12:58:52.570+0000] {subprocess.py:93} INFO - 📥 Téléchargement des données de l'or...
+[2025-02-22T12:58:52.571+0000] {subprocess.py:93} INFO - YF.download() has changed argument auto_adjust default to True
+[2025-02-22T12:58:52.572+0000] {subprocess.py:93} INFO - 📊 Ajout des indicateurs techniques...
+[2025-02-22T12:58:52.572+0000] {subprocess.py:93} INFO -  Données enregistrées dans 'gold_data_complete.csv'
+[2025-02-22T12:58:52.982+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-02-22T12:58:53.013+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=gold_data_dag, task_id=runer, execution_date=20250221T000000, start_date=20250222T125846, end_date=20250222T125853
+[2025-02-22T12:58:53.057+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-22T12:58:53.075+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

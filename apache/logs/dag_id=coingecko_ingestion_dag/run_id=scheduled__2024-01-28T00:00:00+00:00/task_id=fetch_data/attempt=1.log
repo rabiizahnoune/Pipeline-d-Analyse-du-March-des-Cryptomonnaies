@@ -1,0 +1,14 @@
+[2025-02-22T14:30:11.746+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2024-01-28T00:00:00+00:00 [queued]>
+[2025-02-22T14:30:11.862+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2024-01-28T00:00:00+00:00 [queued]>
+[2025-02-22T14:30:11.863+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-02-22T14:30:11.881+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2024-01-28 00:00:00+00:00
+[2025-02-22T14:30:11.885+0000] {standard_task_runner.py:57} INFO - Started process 380 to run task
+[2025-02-22T14:30:11.889+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'fetch_data', 'scheduled__2024-01-28T00:00:00+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpzuw0aifw']
+[2025-02-22T14:30:11.891+0000] {standard_task_runner.py:85} INFO - Job 44: Subtask fetch_data
+[2025-02-22T14:30:11.944+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2024-01-28T00:00:00+00:00 [running]> on host bc125bdcda04
+[2025-02-22T14:30:12.051+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2024-01-28T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-28T00:00:00+00:00'
+[2025-02-22T14:30:14.934+0000] {logging_mixin.py:151} INFO - {'bitcoin': {'usd': 96649, 'usd_market_cap': 1916315644796.8442, 'usd_24h_vol': 45197798380.23532, 'usd_24h_change': -2.4262915027333523}}
+[2025-02-22T14:30:14.935+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-22T14:30:14.949+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=fetch_data, execution_date=20240128T000000, start_date=20250222T143011, end_date=20250222T143014
+[2025-02-22T14:30:14.990+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-22T14:30:15.008+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

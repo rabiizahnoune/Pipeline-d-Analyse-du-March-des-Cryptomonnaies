@@ -1,0 +1,133 @@
+version: "3.8"
+
+services:
+  airflow-webserver:
+    build:
+      context: .
+      dockerfile: apache.dockerfile  # Spécifie le Dockerfile à utiliser
+    container_name: airflow-webserver
+    restart: always
+    environment:
+      - LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.basic_auth  # Authentification de l'API
+      - AIRFLOW__WEBSERVER__RBAC=True  # Activer RBAC
+      - AIRFLOW__WEBSERVER__WORKERS=4  # Nombre de workers pour le serveur web
+      - HADOOP_HOME=/usr/local/hadoop
+      - HADOOP_CONF_DIR=/etc/hadoop/conf
+      - YARN_HOME=/usr/local/hadoop
+      - HDFS_NAMENODE_URI=hdfs://hadoop-namenode:9000
+    volumes:
+      - ./apache/dags:/opt/airflow/dags
+      - ./apache/logs:/opt/airflow/logs
+      - ./apache/plugins:/opt/airflow/plugins
+      - hadoop_data:/mnt/hadoop_data
+      
+     
+    ports:
+      - "8080:8080"
+    command: webserver
+
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.0
+    container_name: airflow-scheduler
+    restart: always
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    depends_on:
+      - airflow-webserver
+      - postgres  # Attendre la base de donnÃ©es
+    volumes:
+      - ./apache/dags:/opt/airflow/dags
+      - ./apache/logs:/opt/airflow/logs
+      - ./apache/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+      - hadoop_data:/mnt/hadoop_data
+    command: scheduler
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  scraper:
+    build: 
+       context: ./scripts
+       dockerfile: dockerfile
+
+    container_name: scraper
+    volumes:
+      - ./scripts:/app
+      - ./scripts/data:/app/data
+  mapreduce:
+    build: 
+       context: ./scripts
+       dockerfile: mapreduce.dockerfile
+    container_name: mapreduce
+    volumes:
+      - ./scripts:/app
+      - ./scripts/data:/app/data
+    
+
+  loader:
+    build:
+       context: ./scripts
+       dockerfile : loader.dockerfile
+    container_name: loader
+    volumes:
+      - ./scripts:/app
+      - ./scripts/data:/app/data
+    
+  hadoop-namenode:
+    image: bde2020/hadoop-namenode:latest
+    container_name: hadoop-namenode
+    ports:
+      - "9870:9870"
+    environment:
+      - CLUSTER_NAME=hadoop
+      - CORE_CONF_fs.defaultFS=hdfs://hadoop-namenode:8020  # <--- Ajout de cette ligne
+    volumes:
+      - hdfs:/hadoop/dfs/name
+      - hadoop_data:/mnt/hadoop_data
+      - hadoop_config:/etc/hadoop/conf
+
+  hadoop-datanode:
+    image: bde2020/hadoop-datanode:latest
+    container_name: hadoop-datanode
+    environment:
+      - SERVICE_PRECONDITION=hadoop-namenode:8020  # Corrected from 9000 to 8020
+      - CORE_CONF_fs.defaultFS=hdfs://hadoop-namenode:8020  # Corrected host and port
+    depends_on:
+      - hadoop-namenode
+    volumes:
+      - hdfs:/hadoop/dfs/data
+      - hadoop_data:/mnt/hadoop_data
+      - hadoop_config:/etc/hadoop/conf
+
+  hbase:
+    image: harisekhon/hbase
+    container_name: hbase
+    ports:
+      - "16010:16010"
+      - "9090:9090"
+    environment:
+      - HBASE_MANAGES_ZK=true
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+
+volumes:
+  hdfs:
+  postgres_data:
+  hadoop_data:
+  hadoop_config:
