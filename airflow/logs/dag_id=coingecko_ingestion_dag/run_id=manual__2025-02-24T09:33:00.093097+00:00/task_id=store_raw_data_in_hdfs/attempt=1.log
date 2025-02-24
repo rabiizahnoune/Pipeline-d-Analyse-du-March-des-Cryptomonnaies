@@ -1,0 +1,13 @@
+[2025-02-24T09:33:06.518+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T09:33:00.093097+00:00 [queued]>
+[2025-02-24T09:33:06.528+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T09:33:00.093097+00:00 [queued]>
+[2025-02-24T09:33:06.529+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-24T09:33:06.552+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-24 09:33:00.093097+00:00
+[2025-02-24T09:33:06.560+0000] {standard_task_runner.py:57} INFO - Started process 249 to run task
+[2025-02-24T09:33:06.563+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'manual__2025-02-24T09:33:00.093097+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpe856th5p']
+[2025-02-24T09:33:06.568+0000] {standard_task_runner.py:85} INFO - Job 6: Subtask store_raw_data_in_hdfs
+[2025-02-24T09:33:06.644+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T09:33:00.093097+00:00 [running]> on host 5a79a95162ce
+[2025-02-24T09:33:06.770+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T09:33:00.093097+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-24T09:33:00.093097+00:00'
+[2025-02-24T09:33:07.036+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-24T09:33:07.056+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250224T093300, start_date=20250224T093306, end_date=20250224T093307
+[2025-02-24T09:33:07.100+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-24T09:33:07.125+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

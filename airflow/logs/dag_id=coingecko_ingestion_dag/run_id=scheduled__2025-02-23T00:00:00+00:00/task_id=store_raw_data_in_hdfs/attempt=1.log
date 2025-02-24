@@ -1,0 +1,35 @@
+[2025-02-24T09:33:06.518+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T09:33:06.528+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T09:33:06.529+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-24T09:33:06.550+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-23 00:00:00+00:00
+[2025-02-24T09:33:06.557+0000] {standard_task_runner.py:57} INFO - Started process 248 to run task
+[2025-02-24T09:33:06.560+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-23T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpfp6ong1b']
+[2025-02-24T09:33:06.565+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask store_raw_data_in_hdfs
+[2025-02-24T09:33:06.642+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [running]> on host 5a79a95162ce
+[2025-02-24T09:33:06.780+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-23T00:00:00+00:00'
+[2025-02-24T09:33:07.038+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-24T09:33:07.055+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250223T000000, start_date=20250224T093306, end_date=20250224T093307
+[2025-02-24T09:33:07.095+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-24T09:33:07.119+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-24T12:23:52.730+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T12:23:52.747+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T12:23:52.747+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-24T12:23:52.771+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-23 00:00:00+00:00
+[2025-02-24T12:23:52.778+0000] {standard_task_runner.py:57} INFO - Started process 268 to run task
+[2025-02-24T12:23:52.782+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-23T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmp3uu78v7c']
+[2025-02-24T12:23:52.786+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask store_raw_data_in_hdfs
+[2025-02-24T12:23:52.855+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-23T00:00:00+00:00 [running]> on host 94f70d9be3b1
+[2025-02-24T12:23:52.979+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-23T00:00:00+00:00'
+[2025-02-24T12:23:53.002+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/test.py", line 38, in store_raw_data_in_hdfs
+    with open(local_file, 'w') as f:
+PermissionError: [Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'
+[2025-02-24T12:23:53.017+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250223T000000, start_date=20250224T122352, end_date=20250224T122353
+[2025-02-24T12:23:53.036+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 7 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'; 268)
+[2025-02-24T12:23:53.075+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T12:23:53.092+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

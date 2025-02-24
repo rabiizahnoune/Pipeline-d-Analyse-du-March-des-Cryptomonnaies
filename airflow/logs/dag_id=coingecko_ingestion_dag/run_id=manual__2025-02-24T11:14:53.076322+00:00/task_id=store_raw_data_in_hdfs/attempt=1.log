@@ -1,0 +1,23 @@
+[2025-02-24T11:14:56.409+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T11:14:53.076322+00:00 [queued]>
+[2025-02-24T11:14:56.430+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T11:14:53.076322+00:00 [queued]>
+[2025-02-24T11:14:56.431+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-24T11:14:56.458+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-24 11:14:53.076322+00:00
+[2025-02-24T11:14:56.462+0000] {standard_task_runner.py:57} INFO - Started process 294 to run task
+[2025-02-24T11:14:56.466+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'manual__2025-02-24T11:14:53.076322+00:00', '--job-id', '52', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp5stkvzt0']
+[2025-02-24T11:14:56.471+0000] {standard_task_runner.py:85} INFO - Job 52: Subtask store_raw_data_in_hdfs
+[2025-02-24T11:14:56.529+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs manual__2025-02-24T11:14:53.076322+00:00 [running]> on host 18f7020ba7a7
+[2025-02-24T11:14:56.679+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T11:14:53.076322+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-24T11:14:53.076322+00:00'
+[2025-02-24T11:14:56.706+0000] {pipeline.py:148} ERROR - Erreur dans store_raw_data_in_hdfs: Aucune donnée brute récupérée depuis XCom
+[2025-02-24T11:14:56.707+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/pipeline.py", line 83, in store_raw_data_in_hdfs
+    raise ValueError("Aucune donnée brute récupérée depuis XCom")
+ValueError: Aucune donnée brute récupérée depuis XCom
+[2025-02-24T11:14:56.728+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250224T111453, start_date=20250224T111456, end_date=20250224T111456
+[2025-02-24T11:14:56.744+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 52 for task store_raw_data_in_hdfs (Aucune donnée brute récupérée depuis XCom; 294)
+[2025-02-24T11:14:56.760+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T11:14:56.777+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

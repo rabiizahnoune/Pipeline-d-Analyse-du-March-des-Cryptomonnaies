@@ -1,118 +1,143 @@
 version: "3.8"
 
 services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_db_volume:/var/lib/postgresql/data
+    networks:
+      - airflow_network
+
+
+  airflow-init:
+    image: apache/airflow:2.7.1
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+      - hadoop_datanode:/mnt/hadoop_data
+
+
+    entrypoint: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin"
+    networks:
+      - airflow_network
+
+
   airflow-webserver:
-    build:
-      context: .
-      dockerfile: apache.dockerfile  # Spécifie le Dockerfile à utiliser
-    container_name: airflow-webserver
+    build: 
+      context: ./
+      dockerfile: apache.dockerfile
     restart: always
     environment:
-      - LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-      - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.basic_auth  # Authentification de l'API
-      - AIRFLOW__WEBSERVER__RBAC=True  # Activer RBAC
-      - AIRFLOW__WEBSERVER__WORKERS=4  # Nombre de workers pour le serveur web
-      - HADOOP_HOME=/usr/local/hadoop
-      - HADOOP_CONF_DIR=/etc/hadoop/conf
-      - YARN_HOME=/usr/local/hadoop
-      - HDFS_NAMENODE_URI=hdfs://hadoop-namenode:9000
-    volumes:
-      - ./apache/dags:/opt/airflow/dags
-      - ./apache/logs:/opt/airflow/logs
-      - ./apache/plugins:/opt/airflow/plugins
-      - hadoop_data:/mnt/hadoop_data
-      
-     
+      - AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.basic_auth
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+      - airflow-init
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+      - hadoop_datanode:/mnt/hadoop_data
     command: webserver
+    networks:
+      - airflow_network
 
 
   airflow-scheduler:
-    image: apache/airflow:2.7.0
-    container_name: airflow-scheduler
+    build: 
+      context: ./
+      dockerfile: apache.dockerfile
     restart: always
     environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-    depends_on:
-      - airflow-webserver
-      - postgres  # Attendre la base de donnÃ©es
     volumes:
-      - ./apache/dags:/opt/airflow/dags
-      - ./apache/logs:/opt/airflow/logs
-      - ./apache/plugins:/opt/airflow/plugins
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - hadoop_datanode:/mnt/hadoop_data
       - /var/run/docker.sock:/var/run/docker.sock
-      - hadoop_data:/mnt/hadoop_data
     command: scheduler
+    depends_on:
+      - postgres
+    networks:
+      - airflow_network
 
-  postgres:
-    image: postgres:13
-    container_name: postgres
-    restart: always
-    environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_PASSWORD=airflow
-      - POSTGRES_DB=airflow
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   scraper:
-    build: 
-       context: ./scripts
-       dockerfile: dockerfile
-
+    build:
+      context: ./scripts
+      dockerfile: dockerfile
     container_name: scraper
     volumes:
       - ./scripts:/app
       - ./scripts/data:/app/data
+    depends_on:
+      - namenode
+      - datanode1
+
   mapreduce:
-    build: 
-       context: ./scripts
-       dockerfile: mapreduce.dockerfile
+    build:
+      context: ./scripts
+      dockerfile: mapreduce.dockerfile
     container_name: mapreduce
     volumes:
       - ./scripts:/app
       - ./scripts/data:/app/data
-    
+    depends_on:
+      - namenode
+      - datanode1
 
-  loader:
-    build:
-       context: ./scripts
-       dockerfile : loader.dockerfile
-    container_name: loader
-    volumes:
-      - ./scripts:/app
-      - ./scripts/data:/app/data
-    
-  hadoop-namenode:
-    image: bde2020/hadoop-namenode:latest
-    container_name: hadoop-namenode
+
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
     ports:
       - "9870:9870"
-    environment:
-      - CLUSTER_NAME=hadoop
-      - CORE_CONF_fs.defaultFS=hdfs://hadoop-namenode:8020  # <--- Ajout de cette ligne
     volumes:
-      - hdfs:/hadoop/dfs/name
-      - hadoop_data:/mnt/hadoop_data
-      - hadoop_config:/etc/hadoop/conf
+      - namenode_data:/hadoop/dfs/name
+      - hadoop_datanode:/mnt/hadoop_data
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=1
+      - CLUSTER_NAME=test
+    networks:
+      - airflow_network
 
-  hadoop-datanode:
-    image: bde2020/hadoop-datanode:latest
-    container_name: hadoop-datanode
-    environment:
-      - SERVICE_PRECONDITION=hadoop-namenode:8020  # Corrected from 9000 to 8020
-      - CORE_CONF_fs.defaultFS=hdfs://hadoop-namenode:8020  # Corrected host and port
-    depends_on:
-      - hadoop-namenode
+  datanode1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode1
+    ports:
+      - "9864:9864"
     volumes:
-      - hdfs:/hadoop/dfs/data
-      - hadoop_data:/mnt/hadoop_data
-      - hadoop_config:/etc/hadoop/conf
+      - datanode1_data:/hadoop/dfs/data
+      - hadoop_datanode:/mnt/hadoop_data
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=1
+      - CLUSTER_NAME=test
+    depends_on:
+      - namenode
+    networks:
+      - airflow_network
+
+
 
   hbase:
     image: harisekhon/hbase
@@ -123,11 +148,21 @@ services:
     environment:
       - HBASE_MANAGES_ZK=true
     depends_on:
-      - hadoop-namenode
-      - hadoop-datanode
+      - namenode
+      - datanode1
+    networks:
+      - airflow_network
 
 volumes:
   hdfs:
   postgres_data:
   hadoop_data:
-  hadoop_config:
+  namenode_data:
+  datanode1_data:
+  postgres_db_volume:
+  hadoop_datanode:
+
+
+networks:
+  airflow_network:
+    driver: bridge
