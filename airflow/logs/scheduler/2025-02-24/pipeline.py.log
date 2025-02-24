@@ -3601,3 +3601,101 @@
 [2025-02-24T15:16:34.000+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:16:33.999+0000] {dag.py:2907} INFO - Sync 1 DAGs
 [2025-02-24T15:16:34.036+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:16:34.035+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
 [2025-02-24T15:16:34.072+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.162 seconds
+[2025-02-24T15:17:04.550+0000] {processor.py:157} INFO - Started process (PID=1917) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:04.552+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:17:04.553+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:04.553+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:04.621+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:04.774+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:04.773+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:17:04.797+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:04.796+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:17:04.838+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.292 seconds
+[2025-02-24T15:17:35.050+0000] {processor.py:157} INFO - Started process (PID=1927) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:35.052+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:17:35.054+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:35.053+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:35.091+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:17:35.127+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:35.127+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:17:35.158+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:17:35.157+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:17:35.190+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.144 seconds
+[2025-02-24T15:18:05.490+0000] {processor.py:157} INFO - Started process (PID=1937) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:05.491+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:18:05.493+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:05.492+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:05.527+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:05.680+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:05.679+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:18:05.703+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:05.703+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:18:05.724+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.239 seconds
+[2025-02-24T15:18:35.983+0000] {processor.py:157} INFO - Started process (PID=1947) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:35.984+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:18:35.986+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:35.986+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:36.024+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:18:36.112+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:36.112+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:18:36.156+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:18:36.156+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:18:36.192+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.214 seconds
+[2025-02-24T15:19:06.560+0000] {processor.py:157} INFO - Started process (PID=1957) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:06.561+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:19:06.563+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:06.562+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:06.592+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:06.739+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:06.739+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:19:06.759+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:06.759+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:19:06.784+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.228 seconds
+[2025-02-24T15:19:37.051+0000] {processor.py:157} INFO - Started process (PID=1967) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:37.054+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:19:37.056+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:37.056+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:37.098+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:19:37.143+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:37.142+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:19:37.181+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:19:37.181+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:19:37.222+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.176 seconds
+[2025-02-24T15:20:07.578+0000] {processor.py:157} INFO - Started process (PID=1977) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:07.579+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:20:07.580+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:07.580+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:07.604+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:07.734+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:07.734+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:20:07.755+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:07.755+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:20:07.780+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.205 seconds
+[2025-02-24T15:20:38.064+0000] {processor.py:157} INFO - Started process (PID=1987) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:38.066+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:20:38.068+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:38.067+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:38.110+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:20:38.157+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:38.157+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:20:38.186+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:20:38.186+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:20:38.209+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.151 seconds
+[2025-02-24T15:21:08.582+0000] {processor.py:157} INFO - Started process (PID=1997) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:08.583+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:21:08.585+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:08.585+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:08.617+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:08.749+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:08.749+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:21:08.769+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:08.769+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:21:08.793+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.216 seconds
+[2025-02-24T15:21:39.069+0000] {processor.py:157} INFO - Started process (PID=2007) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:39.070+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:21:39.071+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:39.070+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:39.097+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:21:39.126+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:39.126+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:21:39.151+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:21:39.150+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:21:39.179+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.113 seconds
+[2025-02-24T15:22:09.538+0000] {processor.py:157} INFO - Started process (PID=2017) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:09.539+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:22:09.541+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:09.540+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:09.580+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:09.797+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:09.797+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:22:09.830+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:09.830+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:22:09.870+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.336 seconds
+[2025-02-24T15:22:40.135+0000] {processor.py:157} INFO - Started process (PID=2027) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:40.141+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:22:40.144+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:40.143+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:40.202+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:22:40.259+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:40.258+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:22:40.334+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:22:40.333+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:22:40.388+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.261 seconds
+[2025-02-24T15:23:10.730+0000] {processor.py:157} INFO - Started process (PID=2037) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:10.731+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:23:10.732+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:10.731+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:10.757+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:10.902+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:10.902+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:23:10.922+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:10.922+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:23:10.946+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.220 seconds
+[2025-02-24T15:23:41.206+0000] {processor.py:157} INFO - Started process (PID=2047) to work on /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:41.207+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline.py for tasks to queue
+[2025-02-24T15:23:41.209+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:41.208+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:41.237+0000] {processor.py:839} INFO - DAG(s) dict_keys(['coingecko_ingestion_dag']) retrieved from /opt/airflow/dags/pipeline.py
+[2025-02-24T15:23:41.267+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:41.267+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2025-02-24T15:23:41.292+0000] {logging_mixin.py:151} INFO - [2025-02-24T15:23:41.292+0000] {dag.py:3677} INFO - Setting next_dagrun for coingecko_ingestion_dag to 2025-02-24T00:00:00+00:00, run_after=2025-02-25T00:00:00+00:00
+[2025-02-24T15:23:41.318+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline.py took 0.116 seconds
