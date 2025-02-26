@@ -1,0 +1,162 @@
+[2025-02-26T20:24:18.743+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:24:18.883+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:24:18.885+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T20:24:18.947+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-01-12 00:00:00+00:00
+[2025-02-26T20:24:18.955+0000] {standard_task_runner.py:57} INFO - Started process 991 to run task
+[2025-02-26T20:24:18.990+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'scheduled__2025-01-12T00:00:00+00:00', '--job-id', '107', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmph6te5m4i']
+[2025-02-26T20:24:19.036+0000] {standard_task_runner.py:85} INFO - Job 107: Subtask run_mapreduce
+[2025-02-26T20:24:19.447+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [running]> on host c96a1011f5a3
+[2025-02-26T20:24:19.881+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-01-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-12T00:00:00+00:00'
+[2025-02-26T20:24:19.900+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T20:24:19.902+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c \'         cd /tmp &&         cp /mnt/hadoop_data/mapreduce/mapper.py . &&         cp /mnt/hadoop_data/mapreduce/reducer.py . &&         chmod +x mapper.py reducer.py &&         hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12 || true &&         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -files mapper.py,reducer.py         -mapper "python mapper.py"         -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=12/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12\'\n        ']
+[2025-02-26T20:24:19.995+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T20:24:33.658+0000] {subprocess.py:93} INFO - rm: `hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12': No such file or directory
+[2025-02-26T20:24:47.670+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:47,668 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T20:24:48.430+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:48,427 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T20:24:48.431+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:48,428 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T20:24:48.553+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:48,551 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T20:24:50.907+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:50,905 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/tmp/hadoop/mapred/staging/root1333929101/.staging/job_local1333929101_0001
+[2025-02-26T20:24:50.909+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:50,907 ERROR streaming.StreamJob: Error Launching job : Input path does not exist: hdfs:/user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=12/yfinance_raw.json
+[2025-02-26T20:24:50.910+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-26T20:24:51.697+0000] {subprocess.py:97} INFO - Command exited with return code 5
+[2025-02-26T20:24:51.758+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 5.
+[2025-02-26T20:24:51.779+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250112T000000, start_date=20250226T202418, end_date=20250226T202451
+[2025-02-26T20:24:51.913+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 107 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 5.; 991)
+[2025-02-26T20:24:52.013+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:24:52.356+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:37:25.762+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:37:25.815+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:37:25.816+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T20:37:25.884+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-01-12 00:00:00+00:00
+[2025-02-26T20:37:25.926+0000] {standard_task_runner.py:57} INFO - Started process 237 to run task
+[2025-02-26T20:37:25.993+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'scheduled__2025-01-12T00:00:00+00:00', '--job-id', '206', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp6teuvnf7']
+[2025-02-26T20:37:26.002+0000] {standard_task_runner.py:85} INFO - Job 206: Subtask run_mapreduce
+[2025-02-26T20:37:26.246+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-12T00:00:00+00:00 [running]> on host 3c0faf52b292
+[2025-02-26T20:37:26.737+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-01-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-12T00:00:00+00:00'
+[2025-02-26T20:37:26.743+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T20:37:26.744+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c \'         cd /tmp &&         cp /mnt/hadoop_data/mapreduce/mapper.py . &&         cp /mnt/hadoop_data/mapreduce/reducer.py . &&         chmod +x mapper.py reducer.py &&         hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12 || true &&         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -files mapper.py,reducer.py         -mapper "python mapper.py"         -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=12/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12\'\n        ']
+[2025-02-26T20:37:26.800+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T20:37:44.538+0000] {subprocess.py:93} INFO - rm: `hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=12': No such file or directory
+[2025-02-26T20:38:02.053+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:02,035 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T20:38:02.441+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:02,439 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T20:38:02.443+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:02,439 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T20:38:02.570+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:02,564 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T20:38:09.691+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:09,685 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-26T20:38:13.099+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:13,097 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-26T20:38:17.641+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:17,637 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local906561708_0001
+[2025-02-26T20:38:17.642+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:17,640 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-26T20:38:28.361+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:28,313 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local906561708_0001_c073b5c0-856b-47d6-aeff-5d8022183204/mapper.py
+[2025-02-26T20:38:29.101+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:29,098 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/reducer.py as file:/tmp/hadoop-root/mapred/local/job_local906561708_0001_89aad275-3875-49a4-9ea2-78a9bada6f78/reducer.py
+[2025-02-26T20:38:44.620+0000] {job.py:219} ERROR - Job heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/jobs/job.py", line 190, in heartbeat
+    session.merge(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3056, in merge
+    return self._merge(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3136, in _merge
+    merged = self.get(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2853, in get
+    return self._get_impl(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2975, in _get_impl
+    return db_load_fn(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/future/engine.py", line 406, in connect
+    return super(Engine, self).connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "postgres" to address: Temporary failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-02-26T20:38:45.258+0000] {subprocess.py:97} INFO - Command exited with return code 137
+[2025-02-26T20:38:45.477+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 137.
+[2025-02-26T20:38:45.509+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250112T000000, start_date=20250226T203725, end_date=20250226T203845
+[2025-02-26T20:38:45.682+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 206 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 137.; 237)
+[2025-02-26T20:38:45.765+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:38:46.125+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

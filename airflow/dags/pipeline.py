@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
 import yfinance as yf
 import pandas as pd
@@ -10,7 +11,7 @@ default_args = {
     'owner': 'etudiant',
     'depends_on_past': False,
     'start_date': datetime(2025, 1, 1),
-    'retries': 1,
+    'retries': 0,
     'retry_delay': timedelta(minutes=5),
 }
 
@@ -75,21 +76,16 @@ def fetch_crypto_data(**context):
     context['ti'].xcom_push(key='raw_data', value=json_data)
 
 def store_raw_data_in_hdfs(**context):
-    """Stocke les données brutes dans HDFS avec partition par date."""
     data = context['ti'].xcom_pull(key='raw_data')
-    
-    # Écriture dans le fichier local
     local_file = '/mnt/hadoop_data/yfinance_raw.json'
     with open(local_file, 'w') as f:
-        json.dump(data, f, indent=4)
+        for record in data:
+            f.write(json.dumps(record) + '\n')  # Écrire chaque objet sur une nouvelle ligne
     
-    # Chemin HDFS basé sur la date d'exécution
     execution_date = context['ds']
     year, month, day = execution_date.split('-')
     hdfs_dir = f"/user/etudiant/crypto/raw/YYYY={year}/MM={month}/DD={day}"
     hdfs_file_path = f"{hdfs_dir}/yfinance_raw.json"
-
-    # Création du répertoire et stockage dans HDFS
     subprocess.run(["docker", "exec", "-i", "-u", "root", "namenode", "hdfs", "dfs", "-mkdir", "-p", hdfs_dir])
     subprocess.run(["docker", "exec", "-i", "-u", "root", "namenode", "hdfs", "dfs", "-put", "-f", local_file, hdfs_file_path])
 
@@ -110,5 +106,22 @@ with DAG(
         python_callable=store_raw_data_in_hdfs,
         provide_context=True
     )
+    run_mapreduce = BashOperator(
+        task_id='run_mapreduce',
+        bash_command="""
+        docker exec -i -u root namenode bash -c ' \
+        cd /tmp && \
+        cp /mnt/hadoop_data/mapreduce/mapper.py . && \
+        cp /mnt/hadoop_data/mapreduce/reducer.py . && \
+        chmod +x mapper.py reducer.py && \
+        hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY={{ ds_nodash[:4] }}/MM={{ ds_nodash[4:6] }}/DD={{ ds_nodash[6:] }} || true && \
+        hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar \
+        -files mapper.py,reducer.py \
+        -mapper "python mapper.py" \
+        -reducer "python reducer.py" \
+        -input hdfs:///user/etudiant/crypto/raw/YYYY={{ ds_nodash[:4] }}/MM={{ ds_nodash[4:6] }}/DD={{ ds_nodash[6:] }}/yfinance_raw.json \
+        -output hdfs:///user/etudiant/crypto/processed/YYYY={{ ds_nodash[:4] }}/MM={{ ds_nodash[4:6] }}/DD={{ ds_nodash[6:] }}'
+        """
+    )
 
-    fetch_data >> store_raw_data
+    fetch_data >> store_raw_data >> run_mapreduce

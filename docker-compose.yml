@@ -84,7 +84,10 @@ services:
   
 
   namenode:
-    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    build:
+       context: ./
+       dockerfile: hadoop.dockerfile
+
     container_name: namenode
     ports:
       - "9870:9870"
@@ -96,6 +99,12 @@ services:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       - HDFS_CONF_dfs_replication=1
       - CLUSTER_NAME=test
+    deploy:
+      resources:
+        limits:
+          memory: 4g  # Limite à 4 Go
+        reservations:
+          memory: 2g  # Réserve 2 Go
     networks:
       - airflow_network
 
@@ -114,6 +123,12 @@ services:
       - CLUSTER_NAME=test
     depends_on:
       - namenode
+    deploy:
+      resources:
+        limits:
+          memory: 4g  # Limite à 4 Go
+        reservations:
+          memory: 2g  # Réserve 2 Go
     networks:
       - airflow_network
 

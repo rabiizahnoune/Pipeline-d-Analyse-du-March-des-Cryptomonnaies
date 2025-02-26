@@ -12,3 +12,183 @@
 [2025-02-25T09:48:33.091+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250115T000000, start_date=20250225T094831, end_date=20250225T094833
 [2025-02-25T09:48:33.148+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
 [2025-02-25T09:48:33.195+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:10:52.285+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:10:52.391+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:10:52.392+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:10:52.465+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-15 00:00:00+00:00
+[2025-02-26T20:10:52.494+0000] {standard_task_runner.py:57} INFO - Started process 514 to run task
+[2025-02-26T20:10:52.494+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-01-15T00:00:00+00:00', '--job-id', '50', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpkgu2uwxu']
+[2025-02-26T20:10:52.503+0000] {standard_task_runner.py:85} INFO - Job 50: Subtask fetch_data
+[2025-02-26T20:10:52.721+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [running]> on host e304e68c626e
+[2025-02-26T20:10:53.310+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-15T00:00:00+00:00'
+[2025-02-26T20:10:54.946+0000] {logging_mixin.py:151} INFO - [
+    {
+        "datetime": "2025-02-25T20:00:00.000Z",
+        "open_price": 87816.71875,
+        "high_price": 88873.140625,
+        "low_price": 87594.2734375,
+        "close_price": 88076.6484375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T21:00:00.000Z",
+        "open_price": 88187.0859375,
+        "high_price": 88637.609375,
+        "low_price": 87775.640625,
+        "close_price": 88598.2109375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T22:00:00.000Z",
+        "open_price": 88692.203125,
+        "high_price": 89344.90625,
+        "low_price": 88446.0390625,
+        "close_price": 88737.1953125,
+        "volume": 102842368,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T23:00:00.000Z",
+        "open_price": 88762.703125,
+        "high_price": 89029.0390625,
+        "low_price": 88623.359375,
+        "close_price": 88701.9140625,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T00:00:00.000Z",
+        "open_price": 88491.3359375,
+        "high_price": 88512.78125,
+        "low_price": 88059.8046875,
+        "close_price": 88059.8046875,
+        "volume": 0,
+        "coin": "BTC"
+    }
+]
+[2025-02-26T20:10:55.046+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:10:55.082+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250115T000000, start_date=20250226T201052, end_date=20250226T201055
+[2025-02-26T20:10:55.406+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:10:55.519+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:30:23.008+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:30:23.191+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:30:23.211+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:30:23.317+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-15 00:00:00+00:00
+[2025-02-26T20:30:23.356+0000] {standard_task_runner.py:57} INFO - Started process 1720 to run task
+[2025-02-26T20:30:23.397+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-01-15T00:00:00+00:00', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpaoh3blbj']
+[2025-02-26T20:30:23.457+0000] {standard_task_runner.py:85} INFO - Job 169: Subtask fetch_data
+[2025-02-26T20:30:23.684+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [running]> on host c96a1011f5a3
+[2025-02-26T20:30:24.026+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-15T00:00:00+00:00'
+[2025-02-26T20:30:25.842+0000] {logging_mixin.py:151} INFO - [
+    {
+        "datetime": "2025-02-25T20:00:00.000Z",
+        "open_price": 87816.71875,
+        "high_price": 88873.140625,
+        "low_price": 87594.2734375,
+        "close_price": 88076.6484375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T21:00:00.000Z",
+        "open_price": 88187.0859375,
+        "high_price": 88637.609375,
+        "low_price": 87775.640625,
+        "close_price": 88598.2109375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T22:00:00.000Z",
+        "open_price": 88692.203125,
+        "high_price": 89344.90625,
+        "low_price": 88446.0390625,
+        "close_price": 88737.1953125,
+        "volume": 102842368,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T23:00:00.000Z",
+        "open_price": 88762.703125,
+        "high_price": 89029.0390625,
+        "low_price": 88623.359375,
+        "close_price": 88701.9140625,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T00:00:00.000Z",
+        "open_price": 88491.3359375,
+        "high_price": 88512.78125,
+        "low_price": 88059.8046875,
+        "close_price": 88059.8046875,
+        "volume": 0,
+        "coin": "BTC"
+    }
+]
+[2025-02-26T20:30:26.013+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:30:26.132+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250115T000000, start_date=20250226T203023, end_date=20250226T203026
+[2025-02-26T20:30:26.334+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:30:27.339+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:40:07.515+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:40:07.559+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [queued]>
+[2025-02-26T20:40:07.561+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:40:07.623+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-15 00:00:00+00:00
+[2025-02-26T20:40:07.658+0000] {standard_task_runner.py:57} INFO - Started process 1094 to run task
+[2025-02-26T20:40:07.654+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-01-15T00:00:00+00:00', '--job-id', '278', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp87gq93m0']
+[2025-02-26T20:40:07.689+0000] {standard_task_runner.py:85} INFO - Job 278: Subtask fetch_data
+[2025-02-26T20:40:07.893+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-01-15T00:00:00+00:00 [running]> on host 3c0faf52b292
+[2025-02-26T20:40:08.279+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-15T00:00:00+00:00'
+[2025-02-26T20:40:10.353+0000] {logging_mixin.py:151} INFO - [
+    {
+        "datetime": "2025-02-25T20:00:00.000Z",
+        "open_price": 87816.71875,
+        "high_price": 88873.140625,
+        "low_price": 87594.2734375,
+        "close_price": 88076.6484375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T21:00:00.000Z",
+        "open_price": 88187.0859375,
+        "high_price": 88637.609375,
+        "low_price": 87775.640625,
+        "close_price": 88598.2109375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T22:00:00.000Z",
+        "open_price": 88692.203125,
+        "high_price": 89344.90625,
+        "low_price": 88446.0390625,
+        "close_price": 88737.1953125,
+        "volume": 102842368,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T23:00:00.000Z",
+        "open_price": 88762.703125,
+        "high_price": 89029.0390625,
+        "low_price": 88623.359375,
+        "close_price": 88701.9140625,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T00:00:00.000Z",
+        "open_price": 88491.3359375,
+        "high_price": 88512.78125,
+        "low_price": 88059.8046875,
+        "close_price": 88059.8046875,
+        "volume": 0,
+        "coin": "BTC"
+    }
+]
+[2025-02-26T20:40:10.445+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:40:10.475+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250115T000000, start_date=20250226T204007, end_date=20250226T204010
+[2025-02-26T20:40:10.929+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:40:11.017+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

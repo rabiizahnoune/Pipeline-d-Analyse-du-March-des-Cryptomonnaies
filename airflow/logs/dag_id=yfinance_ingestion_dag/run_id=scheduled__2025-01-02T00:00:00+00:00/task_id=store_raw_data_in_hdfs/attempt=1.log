@@ -11,3 +11,51 @@
 [2025-02-25T09:49:38.212+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250102T000000, start_date=20250225T094844, end_date=20250225T094938
 [2025-02-25T09:49:38.489+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
 [2025-02-25T09:49:38.701+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:10:52.929+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:10:53.049+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:10:53.083+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:10:53.745+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-01-02 00:00:00+00:00
+[2025-02-26T20:10:53.789+0000] {standard_task_runner.py:57} INFO - Started process 520 to run task
+[2025-02-26T20:10:53.811+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-01-02T00:00:00+00:00', '--job-id', '53', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp4gkt57rt']
+[2025-02-26T20:10:53.854+0000] {standard_task_runner.py:85} INFO - Job 53: Subtask store_raw_data_in_hdfs
+[2025-02-26T20:10:54.159+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [running]> on host e304e68c626e
+[2025-02-26T20:10:54.574+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-02T00:00:00+00:00'
+[2025-02-26T20:10:54.624+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/pipeline.py", line 84, in store_raw_data_in_hdfs
+    with open(local_file, 'w') as f:
+PermissionError: [Errno 13] Permission denied: '/mnt/hadoop_data/yfinance_raw.json'
+[2025-02-26T20:10:54.682+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=yfinance_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250102T000000, start_date=20250226T201052, end_date=20250226T201054
+[2025-02-26T20:10:54.732+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 53 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: '/mnt/hadoop_data/yfinance_raw.json'; 520)
+[2025-02-26T20:10:54.788+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:10:54.897+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:30:20.949+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:30:21.011+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:30:21.018+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:30:21.865+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-01-02 00:00:00+00:00
+[2025-02-26T20:30:21.887+0000] {standard_task_runner.py:57} INFO - Started process 1694 to run task
+[2025-02-26T20:30:21.912+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-01-02T00:00:00+00:00', '--job-id', '167', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpubxm16r0']
+[2025-02-26T20:30:21.951+0000] {standard_task_runner.py:85} INFO - Job 167: Subtask store_raw_data_in_hdfs
+[2025-02-26T20:30:22.158+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [running]> on host c96a1011f5a3
+[2025-02-26T20:30:22.540+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-02T00:00:00+00:00'
+[2025-02-26T20:30:54.675+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:30:54.702+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250102T000000, start_date=20250226T203020, end_date=20250226T203054
+[2025-02-26T20:30:54.802+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:30:54.856+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:40:07.757+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:40:07.869+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [queued]>
+[2025-02-26T20:40:07.870+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:40:07.935+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-01-02 00:00:00+00:00
+[2025-02-26T20:40:07.974+0000] {standard_task_runner.py:57} INFO - Started process 1101 to run task
+[2025-02-26T20:40:07.997+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-01-02T00:00:00+00:00', '--job-id', '279', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp_w6qf7sh']
+[2025-02-26T20:40:08.004+0000] {standard_task_runner.py:85} INFO - Job 279: Subtask store_raw_data_in_hdfs
+[2025-02-26T20:40:08.209+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-01-02T00:00:00+00:00 [running]> on host 3c0faf52b292
+[2025-02-26T20:40:08.688+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-02T00:00:00+00:00'
+[2025-02-26T20:40:09.218+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:40:09.263+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250102T000000, start_date=20250226T204007, end_date=20250226T204009
+[2025-02-26T20:40:09.565+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:40:09.622+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
