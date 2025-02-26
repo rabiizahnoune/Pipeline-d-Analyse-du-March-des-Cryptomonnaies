@@ -1,6 +1,7 @@
 #intialiser base de donnes
 docker-compose run --rm airflow-webserver airflow db init
 
+
 docker-compose run --rm airflow-scheduler airflow db init
 
 

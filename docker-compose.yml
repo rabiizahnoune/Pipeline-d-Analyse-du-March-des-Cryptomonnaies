@@ -22,10 +22,9 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
       - /var/run/docker.sock:/var/run/docker.sock
       - hadoop_datanode:/mnt/hadoop_data
-
-
     entrypoint: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin"
     networks:
       - airflow_network
@@ -53,6 +52,7 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - /var/run/docker.sock:/var/run/docker.sock
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     command: webserver
     networks:
       - airflow_network
@@ -73,6 +73,7 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - hadoop_datanode:/mnt/hadoop_data
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     command: scheduler
     depends_on:
       - postgres
@@ -80,30 +81,7 @@ services:
       - airflow_network
 
 
-  scraper:
-    build:
-      context: ./scripts
-      dockerfile: dockerfile
-    container_name: scraper
-    volumes:
-      - ./scripts:/app
-      - ./scripts/data:/app/data
-    depends_on:
-      - namenode
-      - datanode1
-
-  mapreduce:
-    build:
-      context: ./scripts
-      dockerfile: mapreduce.dockerfile
-    container_name: mapreduce
-    volumes:
-      - ./scripts:/app
-      - ./scripts/data:/app/data
-    depends_on:
-      - namenode
-      - datanode1
-
+  
 
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
@@ -113,6 +91,7 @@ services:
     volumes:
       - namenode_data:/hadoop/dfs/name
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     environment:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       - HDFS_CONF_dfs_replication=1
@@ -128,6 +107,7 @@ services:
     volumes:
       - datanode1_data:/hadoop/dfs/data
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     environment:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       - HDFS_CONF_dfs_replication=1

@@ -1,0 +1,31 @@
+[2025-02-25T00:05:16.345+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T00:05:16.357+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T00:05:16.358+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-25T00:05:16.381+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-24 00:00:00+00:00
+[2025-02-25T00:05:16.387+0000] {standard_task_runner.py:57} INFO - Started process 10877 to run task
+[2025-02-25T00:05:16.390+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_mapreduce_dag', 'run_mapreduce_job', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/test_hello.py', '--cfg-path', '/tmp/tmpfl5g0rut']
+[2025-02-25T00:05:16.393+0000] {standard_task_runner.py:85} INFO - Job 28: Subtask run_mapreduce_job
+[2025-02-25T00:05:16.453+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [running]> on host 94f70d9be3b1
+[2025-02-25T00:05:16.569+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_mapreduce_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T00:05:16.571+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T00:05:16.572+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c "\n            hdfs dfs -rm -r /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=24 || true &&             hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar                 -files hdfs:///user/etudiant/scripts/mapper.py,hdfs:///user/etudiant/scripts/reducer.py                 -mapper \'python3 mapper.py\'                 -reducer \'python3 reducer.py\'                 -input /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=24/coingecko_raw.json                 -output /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=24\n        "\n        ']
+[2025-02-25T00:05:16.584+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T00:05:18.144+0000] {subprocess.py:93} INFO - rm: `/user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=24': No such file or directory
+[2025-02-25T00:05:20.437+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,435 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-25T00:05:20.556+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,554 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-25T00:05:20.557+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,554 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-25T00:05:20.573+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,571 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-25T00:05:20.742+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,741 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+[2025-02-25T00:05:20.850+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,848 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/tmp/hadoop/mapred/staging/root1609672035/.staging/job_local1609672035_0001
+[2025-02-25T00:05:20.851+0000] {subprocess.py:93} INFO - 2025-02-25 00:05:20,850 ERROR streaming.StreamJob: Error launching job , bad input path : File does not exist: /tmp/hadoop/mapred/staging/root1609672035/.staging/job_local1609672035_0001/files/mapper.py
+[2025-02-25T00:05:20.852+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-25T00:05:21.338+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-02-25T00:05:21.352+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-02-25T00:05:21.357+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=coingecko_mapreduce_dag, task_id=run_mapreduce_job, execution_date=20250224T000000, start_date=20250225T000516, end_date=20250225T000521
+[2025-02-25T00:05:21.372+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 28 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 2.; 10877)
+[2025-02-25T00:05:21.392+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T00:05:21.412+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
