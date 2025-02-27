@@ -6,6 +6,7 @@ import yfinance as yf
 import pandas as pd
 import json
 import subprocess
+import happybase
 
 default_args = {
     'owner': 'etudiant',
@@ -89,6 +90,54 @@ def store_raw_data_in_hdfs(**context):
     subprocess.run(["docker", "exec", "-i", "-u", "root", "namenode", "hdfs", "dfs", "-mkdir", "-p", hdfs_dir])
     subprocess.run(["docker", "exec", "-i", "-u", "root", "namenode", "hdfs", "dfs", "-put", "-f", local_file, hdfs_file_path])
 
+def store_in_hbase(**context):
+    # Récupérer la date d'exécution
+    execution_date = context['ds']
+    year, month, day = execution_date.split('-')
+    hdfs_output_path = f"hdfs:///user/etudiant/crypto/processed/YYYY={year}/MM={month}/DD={day}/part-00000"
+    
+    # Lire le fichier part-00000 depuis HDFS
+    result = subprocess.run(
+        ["docker", "exec", "-i", "-u", "root", "namenode", "hdfs", "dfs", "-cat", hdfs_output_path],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        raise ValueError(f"Erreur lors de la lecture de {hdfs_output_path}: {result.stderr}")
+    
+    # Les données sont au format JSON, une ligne par coin
+    lines = result.stdout.strip().split('\n')
+    transformed_data = [json.loads(line) for line in lines if line.strip()]
+
+    # Connexion à HBase (assurez-vous que 'hbase' est le nom du conteneur accessible dans le réseau)
+    connection = happybase.Connection('hbase', port=9090)
+    
+    # Créer la table si elle n'existe pas
+    tables = connection.tables()
+    if b'crypto_prices' not in tables:
+        connection.create_table(
+            'crypto_prices',
+            {'stats': dict(max_versions=3)}  # Column Family 'stats' avec jusqu'à 3 versions
+        )
+    
+    # Ouvrir la table
+    table = connection.table('crypto_prices')
+    
+    # Insérer les données
+    with table.batch() as batch:
+        for record in transformed_data:
+            coin = record['coin'].lower()  # Ex. 'bitcoin'
+            row_key = f"{coin}_{execution_date}"  # Ex. 'bitcoin_2025-02-26'
+            batch.put(row_key, {
+                b'stats:price_min': str(record['min_price']).encode('utf-8'),
+                b'stats:price_max': str(record['max_price']).encode('utf-8'),
+                b'stats:price_avg': str(record['avg_price']).encode('utf-8'),
+                b'stats:volume_sum': str(record['total_volume']).encode('utf-8'),
+                b'stats:daily_variation_percent': str(record['daily_variation_percent']).encode('utf-8')
+            })
+    
+    # Fermer la connexion
+    connection.close()
+
 with DAG(
     'yfinance_ingestion_dag',  # Nom corrigé
     default_args=default_args,
@@ -123,5 +172,10 @@ with DAG(
         -output hdfs:///user/etudiant/crypto/processed/YYYY={{ ds_nodash[:4] }}/MM={{ ds_nodash[4:6] }}/DD={{ ds_nodash[6:] }}'
         """
     )
+    store_hbase = PythonOperator(
+        task_id='store_in_hbase',
+        python_callable=store_in_hbase,
+        provide_context=True
+    )
 
-    fetch_data >> store_raw_data >> run_mapreduce
+    fetch_data >> store_raw_data >> run_mapreduce >> store_hbase

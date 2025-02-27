@@ -1,10 +1,22 @@
-FROM apache/airflow:2.7.0
+# Utiliser une image officielle Airflow comme base
+FROM apache/airflow:2.7.1
 
+# Passer en root pour installer des paquets système
 USER root
-RUN apt-get update && apt-get install -y docker.io
+
+# Installer les outils de compilation et les dépendances nécessaires
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    libssl-dev \
+    && apt-get clean
+
+# Revenir à l'utilisateur airflow pour les installations pip
 USER airflow
-RUN pip install --upgrade pip
-# Installer les dépendances si un fichier requirements.txt existe
-RUN pip install yfinance ta pandas
 
-
+# Installer les dépendances Python
+RUN pip install --no-cache-dir \
+    yfinance \
+    ta \
+    pandas \
+    happybase
