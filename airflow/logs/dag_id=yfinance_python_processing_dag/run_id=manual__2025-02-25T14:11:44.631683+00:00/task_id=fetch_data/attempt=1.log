@@ -1,0 +1,34 @@
+[2025-02-25T14:11:47.311+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_python_processing_dag.fetch_data manual__2025-02-25T14:11:44.631683+00:00 [queued]>
+[2025-02-25T14:11:47.321+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_python_processing_dag.fetch_data manual__2025-02-25T14:11:44.631683+00:00 [queued]>
+[2025-02-25T14:11:47.322+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T14:11:47.349+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-02-25 14:11:44.631683+00:00
+[2025-02-25T14:11:47.358+0000] {standard_task_runner.py:57} INFO - Started process 5848 to run task
+[2025-02-25T14:11:47.361+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_python_processing_dag', 'fetch_data', 'manual__2025-02-25T14:11:44.631683+00:00', '--job-id', '190', '--raw', '--subdir', 'DAGS_FOLDER/test_hello.py', '--cfg-path', '/tmp/tmpzthghc9o']
+[2025-02-25T14:11:47.365+0000] {standard_task_runner.py:85} INFO - Job 190: Subtask fetch_data
+[2025-02-25T14:11:47.419+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_python_processing_dag.fetch_data manual__2025-02-25T14:11:44.631683+00:00 [running]> on host 6dbd75e48aaa
+[2025-02-25T14:11:47.516+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_python_processing_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T14:11:44.631683+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-25T14:11:44.631683+00:00'
+[2025-02-25T14:11:47.520+0000] {logging_mixin.py:151} INFO - Execution date: 2025-02-25
+[2025-02-25T14:11:47.533+0000] {logging_mixin.py:151} INFO - Raw data from yfinance (from 2025-02-01 00:00:00 to 2025-02-28 00:00:00):                                  Open        High  ...  Dividends  Stock Splits
+Date                                               ...                         
+2025-02-03 00:00:00-05:00  386.679993  389.170013  ...        0.0           0.0
+2025-02-04 00:00:00-05:00  382.630005  394.000000  ...        0.0           0.0
+2025-02-05 00:00:00-05:00  387.510010  388.390015  ...        0.0           0.0
+2025-02-06 00:00:00-05:00  373.029999  375.399994  ...        0.0           0.0
+2025-02-07 00:00:00-05:00  370.190002  380.549988  ...        0.0           0.0
+2025-02-10 00:00:00-05:00  356.209991  362.700012  ...        0.0           0.0
+2025-02-11 00:00:00-05:00  345.799988  349.369995  ...        0.0           0.0
+2025-02-12 00:00:00-05:00  329.940002  346.399994  ...        0.0           0.0
+2025-02-13 00:00:00-05:00  345.000000  358.690002  ...        0.0           0.0
+2025-02-14 00:00:00-05:00  360.619995  362.000000  ...        0.0           0.0
+2025-02-18 00:00:00-05:00  355.010010  359.100006  ...        0.0           0.0
+2025-02-19 00:00:00-05:00  354.000000  367.339996  ...        0.0           0.0
+2025-02-20 00:00:00-05:00  361.510010  362.299988  ...        0.0           0.0
+2025-02-21 00:00:00-05:00  353.440002  354.980011  ...        0.0           0.0
+2025-02-24 00:00:00-05:00  338.140015  342.399994  ...        0.0           0.0
+
+[15 rows x 7 columns]
+[2025-02-25T14:11:47.536+0000] {logging_mixin.py:151} INFO - Serialized data: {'2025-02-03 00:00:00-05:00': {'Open': 386.67999267578125, 'High': 389.1700134277344, 'Low': 374.3599853515625, 'Close': 383.67999267578125, 'Volume': 93732100, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-04 00:00:00-05:00': {'Open': 382.6300048828125, 'High': 394.0, 'Low': 381.3999938964844, 'Close': 392.2099914550781, 'Volume': 57072200, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-05 00:00:00-05:00': {'Open': 387.510009765625, 'High': 388.3900146484375, 'Low': 375.5299987792969, 'Close': 378.1700134277344, 'Volume': 57223300, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-06 00:00:00-05:00': {'Open': 373.0299987792969, 'High': 375.3999938964844, 'Low': 363.17999267578125, 'Close': 374.32000732421875, 'Volume': 77918200, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-07 00:00:00-05:00': {'Open': 370.19000244140625, 'High': 380.54998779296875, 'Low': 360.3399963378906, 'Close': 361.6199951171875, 'Volume': 70298300, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-10 00:00:00-05:00': {'Open': 356.2099914550781, 'High': 362.70001220703125, 'Low': 350.510009765625, 'Close': 350.7300109863281, 'Volume': 77514900, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-11 00:00:00-05:00': {'Open': 345.79998779296875, 'High': 349.3699951171875, 'Low': 325.1000061035156, 'Close': 328.5, 'Volume': 118543400, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-12 00:00:00-05:00': {'Open': 329.94000244140625, 'High': 346.3999938964844, 'Low': 329.1199951171875, 'Close': 336.510009765625, 'Volume': 105382700, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-13 00:00:00-05:00': {'Open': 345.0, 'High': 358.69000244140625, 'Low': 342.8500061035156, 'Close': 355.94000244140625, 'Volume': 89441500, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-14 00:00:00-05:00': {'Open': 360.6199951171875, 'High': 362.0, 'Low': 347.5, 'Close': 355.8399963378906, 'Volume': 68277300, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-18 00:00:00-05:00': {'Open': 355.010009765625, 'High': 359.1000061035156, 'Low': 350.0199890136719, 'Close': 354.1099853515625, 'Volume': 51631700, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-19 00:00:00-05:00': {'Open': 354.0, 'High': 367.3399963378906, 'Low': 353.6700134277344, 'Close': 360.55999755859375, 'Volume': 67094400, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-20 00:00:00-05:00': {'Open': 361.510009765625, 'High': 362.29998779296875, 'Low': 348.0, 'Close': 354.3999938964844, 'Volume': 45965400, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-21 00:00:00-05:00': {'Open': 353.44000244140625, 'High': 354.9800109863281, 'Low': 334.4200134277344, 'Close': 337.79998779296875, 'Volume': 74058600, 'Dividends': 0.0, 'Stock Splits': 0.0}, '2025-02-24 00:00:00-05:00': {'Open': 338.1400146484375, 'High': 342.3999938964844, 'Low': 324.70001220703125, 'Close': 330.5299987792969, 'Volume': 75468200, 'Dividends': 0.0, 'Stock Splits': 0.0}}
+[2025-02-25T14:11:47.558+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-25T14:11:47.579+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_python_processing_dag, task_id=fetch_data, execution_date=20250225T141144, start_date=20250225T141147, end_date=20250225T141147
+[2025-02-25T14:11:47.619+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-25T14:11:47.662+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

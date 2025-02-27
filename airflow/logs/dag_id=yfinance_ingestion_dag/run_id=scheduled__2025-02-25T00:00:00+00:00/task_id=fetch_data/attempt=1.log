@@ -1,0 +1,174 @@
+[2025-02-26T17:05:55.025+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T17:05:55.044+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T17:05:55.045+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T17:05:55.071+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-02-25 00:00:00+00:00
+[2025-02-26T17:05:55.079+0000] {standard_task_runner.py:57} INFO - Started process 2216 to run task
+[2025-02-26T17:05:55.082+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '214', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpey353xi2']
+[2025-02-26T17:05:55.086+0000] {standard_task_runner.py:85} INFO - Job 214: Subtask fetch_data
+[2025-02-26T17:05:55.147+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [running]> on host 5b727de8dfe1
+[2025-02-26T17:05:55.319+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T17:05:57.769+0000] {xcom.py:661} ERROR - Object of type Timestamp is not JSON serializable. If you are using pickle instead of JSON for XCom, then you need to enable pickle support for XCom in your *** config or make sure to decorate your object with attr.
+[2025-02-26T17:05:57.772+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/json.py", line 91, in default
+    return serialize(o)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/serialization/serde.py", line 178, in serialize
+    raise TypeError(f"cannot serialize object of type {cls}")
+TypeError: cannot serialize object of type <class 'pandas._libs.tslibs.timestamps.Timestamp'>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/pipeline.py", line 62, in fetch_yfinance_data
+    context['ti'].xcom_push(key='raw_data', value=all_data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/session.py", line 77, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2485, in xcom_push
+    XCom.set(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/session.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/xcom.py", line 244, in set
+    value = cls.serialize_value(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/xcom.py", line 659, in serialize_value
+    return json.dumps(value, cls=XComEncoder).encode("UTF-8")
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/json.py", line 104, in encode
+    return super().encode(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/json.py", line 93, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Timestamp is not JSON serializable
+[2025-02-26T17:05:57.796+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250225T000000, start_date=20250226T170555, end_date=20250226T170557
+[2025-02-26T17:05:57.818+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 214 for task fetch_data (Object of type Timestamp is not JSON serializable; 2216)
+[2025-02-26T17:05:57.859+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T17:05:57.884+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:48:02.402+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T20:48:02.451+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T20:48:02.469+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:48:02.542+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-02-25 00:00:00+00:00
+[2025-02-26T20:48:02.558+0000] {standard_task_runner.py:57} INFO - Started process 3383 to run task
+[2025-02-26T20:48:02.571+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '442', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpewikov0g']
+[2025-02-26T20:48:02.576+0000] {standard_task_runner.py:85} INFO - Job 442: Subtask fetch_data
+[2025-02-26T20:48:02.724+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [running]> on host 3c0faf52b292
+[2025-02-26T20:48:03.049+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T20:48:04.538+0000] {logging_mixin.py:151} INFO - [
+    {
+        "datetime": "2025-02-25T20:00:00.000Z",
+        "open_price": 87816.71875,
+        "high_price": 88873.140625,
+        "low_price": 87594.2734375,
+        "close_price": 88076.6484375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T21:00:00.000Z",
+        "open_price": 88187.0859375,
+        "high_price": 88637.609375,
+        "low_price": 87775.640625,
+        "close_price": 88598.2109375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T22:00:00.000Z",
+        "open_price": 88692.203125,
+        "high_price": 89344.90625,
+        "low_price": 88446.0390625,
+        "close_price": 88737.1953125,
+        "volume": 102842368,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-25T23:00:00.000Z",
+        "open_price": 88762.703125,
+        "high_price": 89029.0390625,
+        "low_price": 88623.359375,
+        "close_price": 88701.9140625,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T00:00:00.000Z",
+        "open_price": 88491.3359375,
+        "high_price": 88512.78125,
+        "low_price": 88059.8046875,
+        "close_price": 88059.8046875,
+        "volume": 0,
+        "coin": "BTC"
+    }
+]
+[2025-02-26T20:48:04.674+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:48:04.700+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250225T000000, start_date=20250226T204802, end_date=20250226T204804
+[2025-02-26T20:48:04.832+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:48:05.013+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-27T14:56:22.792+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-27T14:56:22.913+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-27T14:56:22.919+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 1
+[2025-02-27T14:56:23.004+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-02-25 00:00:00+00:00
+[2025-02-27T14:56:23.050+0000] {standard_task_runner.py:57} INFO - Started process 508 to run task
+[2025-02-27T14:56:23.061+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'fetch_data', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '107', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmptgpi5n8f']
+[2025-02-27T14:56:23.108+0000] {standard_task_runner.py:85} INFO - Job 107: Subtask fetch_data
+[2025-02-27T14:56:23.320+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.fetch_data scheduled__2025-02-25T00:00:00+00:00 [running]> on host a71f042480b6
+[2025-02-27T14:56:23.730+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-27T14:56:25.748+0000] {logging_mixin.py:151} INFO - [
+    {
+        "datetime": "2025-02-26T14:00:00.000Z",
+        "open_price": 87072.828125,
+        "high_price": 87563.078125,
+        "low_price": 85422.9375,
+        "close_price": 87432.484375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T15:00:00.000Z",
+        "open_price": 87661.421875,
+        "high_price": 88288.6484375,
+        "low_price": 87374.875,
+        "close_price": 87413.8359375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T16:00:00.000Z",
+        "open_price": 87454.171875,
+        "high_price": 87614.5078125,
+        "low_price": 86253.3046875,
+        "close_price": 86805.0390625,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T17:00:00.000Z",
+        "open_price": 86723.578125,
+        "high_price": 87145.1328125,
+        "low_price": 85626.4609375,
+        "close_price": 85626.4609375,
+        "volume": 0,
+        "coin": "BTC"
+    },
+    {
+        "datetime": "2025-02-26T18:00:00.000Z",
+        "open_price": 86165.1171875,
+        "high_price": 86317.1484375,
+        "low_price": 83829.2109375,
+        "close_price": 83982.5859375,
+        "volume": 4174999552,
+        "coin": "BTC"
+    }
+]
+[2025-02-27T14:56:25.860+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-27T14:56:25.950+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_dag, task_id=fetch_data, execution_date=20250225T000000, start_date=20250227T145622, end_date=20250227T145625
+[2025-02-27T14:56:26.503+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-27T14:56:26.724+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check

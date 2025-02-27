@@ -1,0 +1,67 @@
+[2025-02-26T20:31:10.159+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T20:30:08.226770+00:00 [queued]>
+[2025-02-26T20:31:10.214+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T20:30:08.226770+00:00 [queued]>
+[2025-02-26T20:31:10.216+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:31:10.343+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-02-26 20:30:08.226770+00:00
+[2025-02-26T20:31:10.365+0000] {standard_task_runner.py:57} INFO - Started process 2037 to run task
+[2025-02-26T20:31:10.391+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'manual__2025-02-26T20:30:08.226770+00:00', '--job-id', '183', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpzkjz43qf']
+[2025-02-26T20:31:10.409+0000] {standard_task_runner.py:85} INFO - Job 183: Subtask run_mapreduce
+[2025-02-26T20:31:10.696+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T20:30:08.226770+00:00 [running]> on host c96a1011f5a3
+[2025-02-26T20:31:11.125+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T20:30:08.226770+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T20:30:08.226770+00:00'
+[2025-02-26T20:31:11.130+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T20:31:11.139+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c \'         cd /tmp &&         cp /mnt/hadoop_data/mapreduce/mapper.py . &&         cp /mnt/hadoop_data/mapreduce/reducer.py . &&         chmod +x mapper.py reducer.py &&         hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=26 || true &&         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -files mapper.py,reducer.py         -mapper "python mapper.py"         -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=26/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=26\'\n        ']
+[2025-02-26T20:31:11.234+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T20:31:30.624+0000] {subprocess.py:93} INFO - rm: `hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=26': No such file or directory
+[2025-02-26T20:31:49.330+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:49,327 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T20:31:50.380+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:50,371 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T20:31:50.397+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:50,371 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T20:31:50.646+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:50,605 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T20:31:54.511+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:54,509 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-26T20:31:54.639+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:54,637 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-26T20:31:56.255+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:56,237 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1860506596_0001
+[2025-02-26T20:31:56.256+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:56,237 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-26T20:31:58.249+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:58,242 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local1860506596_0001_74a2308b-698d-4651-9da2-75aa8e135637/mapper.py
+[2025-02-26T20:31:58.510+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:58,508 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/reducer.py as file:/tmp/hadoop-root/mapred/local/job_local1860506596_0001_f87e632a-74e0-45ba-b158-2d4141664936/reducer.py
+[2025-02-26T20:31:59.102+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,099 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+[2025-02-26T20:31:59.113+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,109 INFO mapreduce.Job: Running job: job_local1860506596_0001
+[2025-02-26T20:31:59.270+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,259 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+[2025-02-26T20:31:59.403+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,346 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+[2025-02-26T20:31:59.684+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,668 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-26T20:31:59.687+0000] {subprocess.py:93} INFO - 2025-02-26 20:31:59,668 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-26T20:32:00.163+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:00,160 INFO mapreduce.Job: Job job_local1860506596_0001 running in uber mode : false
+[2025-02-26T20:32:00.195+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:00,182 INFO mapreduce.Job:  map 0% reduce 0%
+[2025-02-26T20:32:00.782+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:00,768 INFO mapred.LocalJobRunner: Waiting for map tasks
+[2025-02-26T20:32:00.831+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:00,820 INFO mapred.LocalJobRunner: Starting task: attempt_local1860506596_0001_m_000000_0
+[2025-02-26T20:32:01.563+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:01,561 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-26T20:32:01.564+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:01,561 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-26T20:32:01.933+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:01,932 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+[2025-02-26T20:32:01.985+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:01,983 INFO mapred.MapTask: Processing split: hdfs://namenode:9000/user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=26/yfinance_raw.json:0+19757
+[2025-02-26T20:32:02.234+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:02,217 INFO mapred.MapTask: numReduceTasks: 1
+[2025-02-26T20:32:03.274+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,263 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+[2025-02-26T20:32:03.275+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,266 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+[2025-02-26T20:32:03.276+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,266 INFO mapred.MapTask: soft limit at 83886080
+[2025-02-26T20:32:03.277+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,267 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+[2025-02-26T20:32:03.278+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,268 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+[2025-02-26T20:32:03.348+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,328 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+[2025-02-26T20:32:13.322+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,743 INFO streaming.PipeMapRed: PipeMapRed exec [/usr/bin/python, mapper.py]
+[2025-02-26T20:32:13.324+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,785 INFO Configuration.deprecation: mapred.work.output.dir is deprecated. Instead, use mapreduce.task.output.dir
+[2025-02-26T20:32:13.325+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,786 INFO Configuration.deprecation: map.input.start is deprecated. Instead, use mapreduce.map.input.start
+[2025-02-26T20:32:13.327+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,832 INFO Configuration.deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+[2025-02-26T20:32:13.328+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,833 INFO Configuration.deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+[2025-02-26T20:32:13.329+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,845 INFO Configuration.deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+[2025-02-26T20:32:13.329+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,845 INFO Configuration.deprecation: mapred.local.dir is deprecated. Instead, use mapreduce.cluster.local.dir
+[2025-02-26T20:32:13.330+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,845 INFO Configuration.deprecation: map.input.file is deprecated. Instead, use mapreduce.map.input.file
+[2025-02-26T20:32:13.331+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,846 INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+[2025-02-26T20:32:13.332+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,846 INFO Configuration.deprecation: map.input.length is deprecated. Instead, use mapreduce.map.input.length
+[2025-02-26T20:32:13.332+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,851 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+[2025-02-26T20:32:13.334+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,851 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+[2025-02-26T20:32:13.336+0000] {subprocess.py:93} INFO - 2025-02-26 20:32:03,865 INFO Configuration.deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+[2025-02-26T20:32:14.216+0000] {subprocess.py:97} INFO - Command exited with return code 137
+[2025-02-26T20:32:14.459+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 137.
+[2025-02-26T20:32:14.548+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250226T203008, start_date=20250226T203110, end_date=20250226T203214
+[2025-02-26T20:32:15.199+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 183 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 137.; 2037)
+[2025-02-26T20:32:15.763+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:32:16.813+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

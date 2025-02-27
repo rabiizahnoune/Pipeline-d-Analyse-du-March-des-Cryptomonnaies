@@ -1,0 +1,37 @@
+[2025-02-26T18:51:46.290+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T18:51:32.493911+00:00 [queued]>
+[2025-02-26T18:51:46.303+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T18:51:32.493911+00:00 [queued]>
+[2025-02-26T18:51:46.304+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T18:51:46.328+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-02-26 18:51:32.493911+00:00
+[2025-02-26T18:51:46.342+0000] {standard_task_runner.py:57} INFO - Started process 391 to run task
+[2025-02-26T18:51:46.350+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'manual__2025-02-26T18:51:32.493911+00:00', '--job-id', '240', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpde3oitrn']
+[2025-02-26T18:51:46.355+0000] {standard_task_runner.py:85} INFO - Job 240: Subtask run_mapreduce
+[2025-02-26T18:51:46.408+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce manual__2025-02-26T18:51:32.493911+00:00 [running]> on host 01fbc518e01a
+[2025-02-26T18:51:46.530+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T18:51:32.493911+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T18:51:32.493911+00:00'
+[2025-02-26T18:51:46.532+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T18:51:46.534+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -file /mnt/hadoop_data/mapreduce/mapper.py -mapper "python mapper.py"         -file /mnt/hadoop_data/mapreduce/reducer.py -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=26/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=26\n        ']
+[2025-02-26T18:51:46.555+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T18:51:47.554+0000] {subprocess.py:93} INFO - 2025-02-26 18:51:47,551 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+[2025-02-26T18:51:48.678+0000] {subprocess.py:93} INFO - packageJobJar: [/mnt/hadoop_data/mapreduce/mapper.py, /mnt/hadoop_data/mapreduce/reducer.py] [] /tmp/streamjob2240885944770951075.jar tmpDir=null
+[2025-02-26T18:51:48.702+0000] {subprocess.py:93} INFO - Exception in thread "main" java.io.IOException: expanding mapper.py would create file outside of /.
+[2025-02-26T18:51:48.703+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.util.RunJar.unJar(RunJar.java:199)
+[2025-02-26T18:51:48.704+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.streaming.StreamJob.submitAndMonitorJob(StreamJob.java:1011)
+[2025-02-26T18:51:48.706+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.streaming.StreamJob.run(StreamJob.java:135)
+[2025-02-26T18:51:48.706+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:76)
+[2025-02-26T18:51:48.707+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:90)
+[2025-02-26T18:51:48.707+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.streaming.HadoopStreaming.main(HadoopStreaming.java:50)
+[2025-02-26T18:51:48.708+0000] {subprocess.py:93} INFO - 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2025-02-26T18:51:48.708+0000] {subprocess.py:93} INFO - 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2025-02-26T18:51:48.709+0000] {subprocess.py:93} INFO - 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2025-02-26T18:51:48.710+0000] {subprocess.py:93} INFO - 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2025-02-26T18:51:48.711+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+[2025-02-26T18:51:48.712+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+[2025-02-26T18:51:49.114+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-26T18:51:49.132+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-26T18:51:49.139+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250226T185132, start_date=20250226T185146, end_date=20250226T185149
+[2025-02-26T18:51:49.166+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 240 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 1.; 391)
+[2025-02-26T18:51:49.205+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T18:51:49.225+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

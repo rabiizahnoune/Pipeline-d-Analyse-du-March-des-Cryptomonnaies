@@ -22,10 +22,9 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
       - /var/run/docker.sock:/var/run/docker.sock
       - hadoop_datanode:/mnt/hadoop_data
-
-
     entrypoint: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin"
     networks:
       - airflow_network
@@ -53,6 +52,7 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - /var/run/docker.sock:/var/run/docker.sock
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     command: webserver
     networks:
       - airflow_network
@@ -73,6 +73,7 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - hadoop_datanode:/mnt/hadoop_data
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     command: scheduler
     depends_on:
       - postgres
@@ -80,43 +81,30 @@ services:
       - airflow_network
 
 
-  scraper:
-    build:
-      context: ./scripts
-      dockerfile: dockerfile
-    container_name: scraper
-    volumes:
-      - ./scripts:/app
-      - ./scripts/data:/app/data
-    depends_on:
-      - namenode
-      - datanode1
-
-  mapreduce:
-    build:
-      context: ./scripts
-      dockerfile: mapreduce.dockerfile
-    container_name: mapreduce
-    volumes:
-      - ./scripts:/app
-      - ./scripts/data:/app/data
-    depends_on:
-      - namenode
-      - datanode1
-
+  
 
   namenode:
-    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    build:
+       context: ./
+       dockerfile: hadoop.dockerfile
+
     container_name: namenode
     ports:
       - "9870:9870"
     volumes:
       - namenode_data:/hadoop/dfs/name
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     environment:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       - HDFS_CONF_dfs_replication=1
       - CLUSTER_NAME=test
+    deploy:
+      resources:
+        limits:
+          memory: 4g  # Limite à 4 Go
+        reservations:
+          memory: 2g  # Réserve 2 Go
     networks:
       - airflow_network
 
@@ -128,12 +116,19 @@ services:
     volumes:
       - datanode1_data:/hadoop/dfs/data
       - hadoop_datanode:/mnt/hadoop_data
+      - ./scripts/mapreduce:/mnt/hadoop_data/mapreduce
     environment:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       - HDFS_CONF_dfs_replication=1
       - CLUSTER_NAME=test
     depends_on:
       - namenode
+    deploy:
+      resources:
+        limits:
+          memory: 4g  # Limite à 4 Go
+        reservations:
+          memory: 2g  # Réserve 2 Go
     networks:
       - airflow_network
 
@@ -150,6 +145,21 @@ services:
     depends_on:
       - namenode
       - datanode1
+    networks:
+      - airflow_network
+
+
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: streamlit.dockerfile
+    container_name: streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - hbase
+    volumes:
+      - ./streamlit:/app
     networks:
       - airflow_network
 

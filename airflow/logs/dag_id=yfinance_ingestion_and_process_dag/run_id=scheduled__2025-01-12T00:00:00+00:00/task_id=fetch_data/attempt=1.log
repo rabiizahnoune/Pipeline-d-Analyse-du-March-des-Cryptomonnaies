@@ -1,0 +1,26 @@
+[2025-02-26T19:12:20.886+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T19:12:21.012+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T19:12:21.026+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T19:12:21.167+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-12 00:00:00+00:00
+[2025-02-26T19:12:21.188+0000] {standard_task_runner.py:57} INFO - Started process 450 to run task
+[2025-02-26T19:12:21.252+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_and_process_dag', 'fetch_data', 'scheduled__2025-01-12T00:00:00+00:00', '--job-id', '265', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpzlcbsfip']
+[2025-02-26T19:12:21.280+0000] {standard_task_runner.py:85} INFO - Job 265: Subtask fetch_data
+[2025-02-26T19:12:21.775+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [running]> on host 405afb11abaf
+[2025-02-26T19:12:22.495+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_and_process_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-12T00:00:00+00:00'
+[2025-02-26T19:12:24.833+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T19:12:24.971+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_and_process_dag, task_id=fetch_data, execution_date=20250112T000000, start_date=20250226T191220, end_date=20250226T191224
+[2025-02-26T19:12:25.374+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T19:12:26.509+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:04:47.321+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:04:47.356+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [queued]>
+[2025-02-26T20:04:47.357+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T20:04:47.394+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-12 00:00:00+00:00
+[2025-02-26T20:04:47.412+0000] {standard_task_runner.py:57} INFO - Started process 246 to run task
+[2025-02-26T20:04:47.419+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_and_process_dag', 'fetch_data', 'scheduled__2025-01-12T00:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpzmhut3m9']
+[2025-02-26T20:04:47.447+0000] {standard_task_runner.py:85} INFO - Job 16: Subtask fetch_data
+[2025-02-26T20:04:47.735+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_and_process_dag.fetch_data scheduled__2025-01-12T00:00:00+00:00 [running]> on host e304e68c626e
+[2025-02-26T20:04:48.047+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_and_process_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-12T00:00:00+00:00'
+[2025-02-26T20:04:49.880+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-26T20:04:49.962+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=yfinance_ingestion_and_process_dag, task_id=fetch_data, execution_date=20250112T000000, start_date=20250226T200447, end_date=20250226T200449
+[2025-02-26T20:04:50.455+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T20:04:50.639+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

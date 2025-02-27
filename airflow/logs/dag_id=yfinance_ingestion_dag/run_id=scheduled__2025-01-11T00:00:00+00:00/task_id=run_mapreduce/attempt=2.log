@@ -1,0 +1,69 @@
+[2025-02-26T20:24:22.486+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [queued]>
+[2025-02-26T20:24:22.559+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [queued]>
+[2025-02-26T20:24:22.565+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T20:24:22.676+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-01-11 00:00:00+00:00
+[2025-02-26T20:24:22.692+0000] {standard_task_runner.py:57} INFO - Started process 1054 to run task
+[2025-02-26T20:24:22.722+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'scheduled__2025-01-11T00:00:00+00:00', '--job-id', '116', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpt5stj_j3']
+[2025-02-26T20:24:22.743+0000] {standard_task_runner.py:85} INFO - Job 116: Subtask run_mapreduce
+[2025-02-26T20:24:22.962+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [running]> on host c96a1011f5a3
+[2025-02-26T20:24:23.447+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-01-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-11T00:00:00+00:00'
+[2025-02-26T20:24:23.461+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T20:24:23.465+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c \'         cd /tmp &&         cp /mnt/hadoop_data/mapreduce/mapper.py . &&         cp /mnt/hadoop_data/mapreduce/reducer.py . &&         chmod +x mapper.py reducer.py &&         hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11 || true &&         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -files mapper.py,reducer.py         -mapper "python mapper.py"         -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=11/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11\'\n        ']
+[2025-02-26T20:24:23.501+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T20:24:38.574+0000] {subprocess.py:93} INFO - rm: `hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11': No such file or directory
+[2025-02-26T20:24:53.955+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:53,949 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T20:24:54.295+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:54,293 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T20:24:54.297+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:54,294 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T20:24:54.378+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:54,373 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T20:24:55.243+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:55,238 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/tmp/hadoop/mapred/staging/root1100942577/.staging/job_local1100942577_0001
+[2025-02-26T20:24:55.246+0000] {subprocess.py:93} INFO - 2025-02-26 20:24:55,240 ERROR streaming.StreamJob: Error Launching job : Input path does not exist: hdfs:/user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=11/yfinance_raw.json
+[2025-02-26T20:24:55.249+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-26T20:24:55.901+0000] {subprocess.py:97} INFO - Command exited with return code 5
+[2025-02-26T20:24:55.934+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 5.
+[2025-02-26T20:24:55.943+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250111T000000, start_date=20250226T202422, end_date=20250226T202455
+[2025-02-26T20:24:55.988+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 116 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 5.; 1054)
+[2025-02-26T20:24:56.008+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:24:56.047+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-26T20:37:26.107+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [queued]>
+[2025-02-26T20:37:26.145+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [queued]>
+[2025-02-26T20:37:26.147+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T20:37:26.231+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce> on 2025-01-11 00:00:00+00:00
+[2025-02-26T20:37:26.250+0000] {standard_task_runner.py:57} INFO - Started process 246 to run task
+[2025-02-26T20:37:26.259+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'yfinance_ingestion_dag', 'run_mapreduce', 'scheduled__2025-01-11T00:00:00+00:00', '--job-id', '205', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpi3hvbfq4']
+[2025-02-26T20:37:26.280+0000] {standard_task_runner.py:85} INFO - Job 205: Subtask run_mapreduce
+[2025-02-26T20:37:26.621+0000] {task_command.py:415} INFO - Running <TaskInstance: yfinance_ingestion_dag.run_mapreduce scheduled__2025-01-11T00:00:00+00:00 [running]> on host 3c0faf52b292
+[2025-02-26T20:37:27.112+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='yfinance_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce' AIRFLOW_CTX_EXECUTION_DATE='2025-01-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-11T00:00:00+00:00'
+[2025-02-26T20:37:27.123+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T20:37:27.126+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i -u root namenode bash -c \'         cd /tmp &&         cp /mnt/hadoop_data/mapreduce/mapper.py . &&         cp /mnt/hadoop_data/mapreduce/reducer.py . &&         chmod +x mapper.py reducer.py &&         hdfs dfs -rm -r hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11 || true &&         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -files mapper.py,reducer.py         -mapper "python mapper.py"         -reducer "python reducer.py"         -input hdfs:///user/etudiant/crypto/raw/YYYY=2025/MM=01/DD=11/yfinance_raw.json         -output hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11\'\n        ']
+[2025-02-26T20:37:27.206+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T20:37:44.629+0000] {subprocess.py:93} INFO - rm: `hdfs:///user/etudiant/crypto/processed/YYYY=2025/MM=01/DD=11': No such file or directory
+[2025-02-26T20:38:02.128+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:02,123 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T20:38:03.179+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:03,175 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T20:38:03.180+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:03,176 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T20:38:03.377+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:03,374 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T20:38:10.128+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:10,126 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-26T20:38:12.476+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:12,455 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-26T20:38:17.376+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:17,352 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1733574098_0001
+[2025-02-26T20:38:17.452+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:17,441 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-26T20:38:26.829+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:26,785 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local1733574098_0001_495a8ffe-72d2-47cb-b04b-10180b2d813b/mapper.py
+[2025-02-26T20:38:27.464+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:27,458 INFO mapred.LocalDistributedCacheManager: Localized file:/tmp/reducer.py as file:/tmp/hadoop-root/mapred/local/job_local1733574098_0001_15524501-33f6-41a2-9e9a-1fa3642478dd/reducer.py
+[2025-02-26T20:38:29.906+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:29,898 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+[2025-02-26T20:38:29.925+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:29,923 INFO mapreduce.Job: Running job: job_local1733574098_0001
+[2025-02-26T20:38:29.969+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:29,966 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+[2025-02-26T20:38:30.014+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:30,011 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+[2025-02-26T20:38:44.800+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:30,403 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-26T20:38:44.803+0000] {subprocess.py:93} INFO - 2025-02-26 20:38:30,403 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-26T20:38:45.290+0000] {subprocess.py:97} INFO - Command exited with return code 137
+[2025-02-26T20:38:45.542+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 137.
+[2025-02-26T20:38:45.618+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=yfinance_ingestion_dag, task_id=run_mapreduce, execution_date=20250111T000000, start_date=20250226T203726, end_date=20250226T203845
+[2025-02-26T20:38:46.103+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 205 for task run_mapreduce (Bash command failed. The command returned a non-zero exit code 137.; 246)
+[2025-02-26T20:38:46.162+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T20:38:46.356+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

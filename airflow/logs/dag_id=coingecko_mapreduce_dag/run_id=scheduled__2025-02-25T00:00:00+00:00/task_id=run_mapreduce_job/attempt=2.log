@@ -1,0 +1,24 @@
+[2025-02-26T15:25:26.107+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T15:25:26.119+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T15:25:26.120+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T15:25:26.145+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): run_mapreduce_job> on 2025-02-25 00:00:00+00:00
+[2025-02-26T15:25:26.153+0000] {standard_task_runner.py:57} INFO - Started process 460 to run task
+[2025-02-26T15:25:26.160+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_mapreduce_dag', 'run_mapreduce_job', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '213', '--raw', '--subdir', 'DAGS_FOLDER/test_hello.py', '--cfg-path', '/tmp/tmp5ugdhswf']
+[2025-02-26T15:25:26.166+0000] {standard_task_runner.py:85} INFO - Job 213: Subtask run_mapreduce_job
+[2025-02-26T15:25:26.252+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_mapreduce_dag.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [running]> on host 5b727de8dfe1
+[2025-02-26T15:25:26.378+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_mapreduce_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T15:25:26.382+0000] {logging_mixin.py:151} INFO - Vérification de l'existence du fichier d'entrée : /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=25/coingecko_raw.json
+[2025-02-26T15:25:26.395+0000] {logging_mixin.py:151} INFO - Erreur : Le fichier d'entrée /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=25/coingecko_raw.json n'existe pas dans HDFS.
+[2025-02-26T15:25:26.396+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/test_hello.py", line 53, in run_mapreduce_job
+    raise ValueError(f"Le fichier HDFS {input_path} n'existe pas.")
+ValueError: Le fichier HDFS /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=25/coingecko_raw.json n'existe pas.
+[2025-02-26T15:25:26.418+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=coingecko_mapreduce_dag, task_id=run_mapreduce_job, execution_date=20250225T000000, start_date=20250226T152526, end_date=20250226T152526
+[2025-02-26T15:25:26.445+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 213 for task run_mapreduce_job (Le fichier HDFS /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=25/coingecko_raw.json n'existe pas.; 460)
+[2025-02-26T15:25:26.475+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T15:25:26.509+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
