@@ -148,6 +148,21 @@ services:
     networks:
       - airflow_network
 
+
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: streamlit.dockerfile
+    container_name: streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - hbase
+    volumes:
+      - ./streamlit:/app
+    networks:
+      - airflow_network
+
 volumes:
   hdfs:
   postgres_data:

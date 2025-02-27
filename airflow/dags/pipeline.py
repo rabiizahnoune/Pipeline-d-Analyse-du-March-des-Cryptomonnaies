@@ -79,6 +79,9 @@ def fetch_crypto_data(**context):
 def store_raw_data_in_hdfs(**context):
     data = context['ti'].xcom_pull(key='raw_data')
     local_file = '/mnt/hadoop_data/yfinance_raw.json'
+    subprocess.run([
+        "docker","exec","-i","-u","root","big_data_projet-airflow-webserver-1","chmod","-R", "777","/mnt/hadoop_data"
+    ])
     with open(local_file, 'w') as f:
         for record in data:
             f.write(json.dumps(record) + '\n')  # Écrire chaque objet sur une nouvelle ligne

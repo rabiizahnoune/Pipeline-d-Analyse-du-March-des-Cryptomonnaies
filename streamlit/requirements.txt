@@ -1,0 +1,4 @@
+streamlit
+happybase
+pandas
+plotly  # Pour des graphiques interactifs
