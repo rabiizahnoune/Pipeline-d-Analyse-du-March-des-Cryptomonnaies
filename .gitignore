@@ -1,1 +1,4 @@
-myenv
+myenvairflow/dags/__pycache__/
+airflow/logs/
+*.pyc
+*.pyc
